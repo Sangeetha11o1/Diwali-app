@@ -1,12 +1,9 @@
 {
-  "homepage": "https://github.com/Sangeetha11o1/Diwali-app",
   "name": "lovelights",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
