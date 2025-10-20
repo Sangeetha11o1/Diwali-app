@@ -1,0 +1,185 @@
+/* Scene */
+.memories-scene {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  padding: 0 50px;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+}
+
+.memories-scene h2 {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #ffd700;
+  text-shadow: 0 0 10px #ff4d4f, 0 0 20px #ffd700;
+  letter-spacing: 1.5px;
+}
+
+/* Floating hearts/text */
+.floating-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.float-item {
+  position: absolute;
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  color: white;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+  }
+}
+
+/* Carousel */
+.memory-carousel-wrapper {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  z-index: 2;
+}
+
+.memory-carousel {
+  display: flex;
+  gap: 20px;
+  animation: scrollCarousel 20s linear infinite;
+}
+
+@keyframes scrollCarousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Card flip */
+.memory-card {
+  perspective: 1000px;
+  min-width: 180px;
+  flex: 0 0 auto;
+}
+
+.memory-inner {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.memory-front,
+.memory-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.memory-front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  font-size: 1rem;
+  color: #ffcccc;
+  text-shadow: 0 0 6px rgba(255, 77, 79, 0.6);
+}
+
+.memory-back {
+  transform: rotateY(180deg);
+}
+
+.memory-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Desktop hover */
+@media (hover: hover) and (pointer: fine) {
+  .memory-card:hover .memory-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Mobile tap */
+@media (hover: none) and (pointer: coarse) {
+  .memory-card.active .memory-inner {
+    transform: rotateY(180deg) scale(1.05); /* Slight pop-out */
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+    z-index: 5;
+  }
+}
+
+/* Continue button */
+.btn-glow {
+  background: linear-gradient(45deg, #ff4d4f, #ffd700);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #ff4d4f, 0 0 30px #ffd700;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.btn-glow:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #ffd700, 0 0 50px #ff4d4f;
+}
+
+.btn-glow:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #ff4d4f;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .memories-scene h2 {
+    font-size: 1.8rem;
+  }
+  .memory-inner {
+    height: 160px;
+  }
+  .memory-card {
+    min-width: 120px;
+  }
+  .memory-front p {
+    font-size: 0.9rem;
+  }
+  .btn-glow {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+  .floating-layer .float-item {
+    font-size: 8px !important;
+  }
+}
